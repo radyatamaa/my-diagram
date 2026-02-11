@@ -1,175 +1,202 @@
-# Step-by-step Development App (Prompt-driven) dengan AI
+# Step-by-Step App Development (AI Prompt Driven)
 
-> Tujuan: bikin aplikasi dari nol sampai siap dipakai dengan cara “AI sebagai pair programmer”, tapi tetap rapi, terukur, dan gampang di-maintain.
-
----
-
-## 1) Definisikan outcome & scope (anti melebar)
-**Output yang harus jelas:**
-- Masalah apa yang diselesaikan
-- User utama siapa
-- 3–5 fitur wajib (MVP)
-- Non-goals (yang sengaja tidak dibuat dulu)
-
-**Prompt ke AI:**
-> “Saya mau bikin aplikasi **[jenis aplikasi]** untuk **[target user]**. MVP fitur wajib: **[...]**. Non-goals: **[...]**. Tolong tulis scope 1 halaman: objective, user story, acceptance criteria, dan constraint teknis.”
+> **Goal:** Build an app from zero to ready for use by using AI as a pair programmer, in a clean, simple, and maintainable way.
 
 ---
 
-## 2) Buat PRD mini + user flow
-Bikin dokumen pendek supaya arah tidak berubah-ubah:
+## 1) Define Goal & Scope (Avoid Scope Creep)
+
+**Make these clear:**
+- What problem the app solves
+- Who the main users are
+- 3–5 required MVP features
+- Non-goals (what will NOT be built now)
+
+**AI Prompt:**
+> “I want to build a **[app type]** for **[target users]**. Required MVP features: **[...]**. Non-goals: **[...]**. Please write a 1-page scope with goals, user stories, acceptance criteria, and technical limits.”
+
+---
+
+## 2) Create Mini PRD & User Flow
+
+Write a short document to keep direction clear:
 - User stories
 - User flow (happy path + edge cases)
-- Data apa yang dibutuhkan
-- Error states & empty states
+- Needed data
+- Error and empty states
 
-**Prompt ke AI:**
-> “Dari scope ini, buat **Mini PRD**: user stories (format ‘As a… I want… so that…’), user flow langkah demi langkah, edge cases penting, dan acceptance criteria per fitur.”
-
----
-
-## 3) Tentukan arsitektur & tech stack (sesuai skill & deadline)
-Pilih stack yang kamu kuat dan cepat shipping.
-- Frontend: React/Next/Vue
-- Backend: Node/Go/Laravel
-- DB: Postgres/MySQL
-- Auth: JWT/OAuth
-- Hosting: VPS/Cloud
-
-**Prompt ke AI:**
-> “Dengan deadline **[X hari]** dan skill saya **[stack]**, rekomendasikan arsitektur sederhana: modul, layer, folder structure, dan alasan trade-off.”
+**AI Prompt:**
+> “From this scope, create a **Mini PRD** with user stories (‘As a… I want… so that…’), step-by-step user flow, key edge cases, and acceptance criteria.”
 
 ---
 
-## 4) Desain data model + API contract dulu (biar coding nggak bolak-balik)
-- ERD / tabel inti
-- Relasi & index
-- API endpoints + request/response contoh
-- Status code & error format
+## 3) Choose Architecture & Tech Stack
 
-**Prompt ke AI:**
-> “Buat data model untuk fitur **[...]**: tabel, kolom, tipe data, relasi, index. Lalu buat API contract (endpoint, payload, response contoh, error).”
+Pick tools you know well and can ship fast.
+
+- Frontend: React / Next / Vue  
+- Backend: Node / Go / Laravel  
+- Database: Postgres / MySQL  
+- Auth: JWT / OAuth  
+- Hosting: VPS / Cloud  
+
+**AI Prompt:**
+> “With a deadline of **[X days]** and my skills in **[stack]**, suggest a simple architecture with modules, layers, folder structure, and trade-offs.”
 
 ---
 
-## 5) Setup repo & standar engineering (biar scalable sejak awal)
-Wajib:
+## 4) Design Data Model & API First
+
+This avoids rewriting code later.
+
+- Main tables
+- Relations and indexes
+- API endpoints with request/response examples
+- Status codes and error format
+
+**AI Prompt:**
+> “Create a data model for feature **[...]** with tables, columns, types, relations, and indexes. Then create an API contract with endpoints, payloads, and sample responses.”
+
+---
+
+## 5) Repo Setup & Engineering Rules
+
+Set standards early.
+
+**Must have:**
 - `.env.example`
-- lint/format
-- pre-commit (optional)
-- logging & config loader
-- basic CI (test + lint)
+- Lint and format tools
+- Pre-commit hooks (optional)
+- Logging and config loader
+- Simple CI (test + lint)
 
-**Prompt ke AI:**
-> “Buat checklist setup repo untuk **[stack]**: env, config, lint, format, test, CI minimal. Sertakan contoh struktur folder.”
-
----
-
-## 6) Generate UI skeleton + component plan (kalau ada frontend)
-- Wireframe sederhana
-- Daftar halaman
-- Component breakdown
-- State management approach
-
-**Prompt ke AI:**
-> “Dari user flow, buat daftar halaman + komponen. Untuk tiap halaman: state yang dibutuhkan, loading/empty/error state, dan rencana integrasi API.”
+**AI Prompt:**
+> “Create a repo setup checklist for **[stack]** with env, config, linting, formatting, testing, and simple CI. Include folder structure.”
 
 ---
 
-## 7) Implementasi iteratif per fitur (vertical slice)
-Kerjain fitur end-to-end per slice:
-1 slice = UI → API → DB → test → polish
+## 6) UI Skeleton & Component Plan (If Frontend)
 
-Contoh urutan:
-1. Auth
-2. CRUD utama
-3. Search/filter
-4. Analytics/logging
+- Simple wireframes
+- Page list
+- Component list
+- State management plan
 
-**Prompt ke AI:**
-> “Buat rencana implementasi model ‘vertical slice’ untuk MVP ini. Urutkan prioritas, estimasi effort, dan risiko per slice.”
+**AI Prompt:**
+> “From the user flow, list all pages and components. For each page, list needed state, loading/empty/error states, and API usage.”
 
 ---
 
-## 8) Testing strategy (minimal tapi efektif)
-Minimal yang penting:
-- Unit test untuk business logic
-- Integration test untuk endpoint penting
-- E2E test 1–2 happy path (kalau sempat)
+## 7) Build Features Step by Step (Vertical Slice)
 
-**Prompt ke AI:**
-> “Untuk stack **[stack]**, rekomendasikan testing pyramid dan tulis test case prioritas untuk fitur **[...]** (happy path + edge).”
+Build one feature fully before moving on.
 
----
+**One slice =** UI → API → DB → Tests → Polish
 
-## 9) Security & quality gate (yang sering kelupaan)
-Checklist cepat:
-- Validasi input (server-side)
-- Rate limit basic
-- Sanitasi output (XSS)
-- AuthZ (role/permission)
-- Secrets jangan masuk git
+**Example order:**
+1. Login / Auth  
+2. Main CRUD  
+3. Search / Filter  
+4. Logs / Analytics  
 
-**Prompt ke AI:**
-> “Review rancangan API saya ini untuk security: apa celah umum, validasi yang wajib, dan perbaikan cepat yang bisa saya lakukan.”
+**AI Prompt:**
+> “Create a vertical slice plan for this MVP. Order features by priority, give effort estimate, and list risks.”
 
 ---
 
-## 10) Observability & debugging (biar gampang maintain)
-- Structured logging
-- Error tracking (opsional)
-- Metrics basic (latency/error rate)
+## 8) Testing Plan (Simple but Useful)
+
+**Minimum tests:**
+- Unit tests for core logic
+- Integration tests for key APIs
+- 1–2 E2E tests for happy paths
+
+**AI Prompt:**
+> “For **[stack]**, suggest a simple testing pyramid and list important test cases for feature **[...]**.”
+
+---
+
+## 9) Security & Quality Checks
+
+Often missed but important.
+
+**Checklist:**
+- Server-side input checks
+- Basic rate limiting
+- Output cleaning (XSS)
+- Role and permission checks
+- Secrets not stored in git
+
+**AI Prompt:**
+> “Review this API design for security risks and suggest quick fixes.”
+
+---
+
+## 10) Logs & Monitoring
+
+Make bugs easier to find.
+
+- Structured logs
+- Error tracking (optional)
+- Basic metrics (response time, errors)
 - Request ID
 
-**Prompt ke AI:**
-> “Tambahkan observability minimal untuk **[stack]**: format log, middleware logging, error handler, dan contoh output log yang baik.”
+**AI Prompt:**
+> “Add simple logging and monitoring for **[stack]** with log format, middleware, and example logs.”
 
 ---
 
-## 11) Deploy pipeline (dev → staging → prod)
-- Docker (jika cocok)
-- Migration run otomatis
+## 11) Deployment Flow
+
+From local to production.
+
+- Docker (if needed)
+- Auto database migration
 - Health check endpoint
-- Rollback plan sederhana
+- Simple rollback plan
 
-**Prompt ke AI:**
-> “Buat langkah deploy untuk **[stack]** ke **[platform]**: env vars, build, migrate, start, healthcheck, dan rollback.”
+**AI Prompt:**
+> “Create deployment steps for **[stack]** on **[platform]** including env vars, build, migrate, start, health check, and rollback.”
 
 ---
 
-## 12) Dokumentasi & handover
-Minimal docs:
-- Cara run lokal
-- Env var
-- API docs (ringkas)
-- Known limitations
+## 12) Documentation & Handover
+
+Keep it short and clear.
+
+**Docs should include:**
+- How to run locally
+- Environment variables
+- API list
+- Known limits
 - Next improvements
 
-**Prompt ke AI:**
-> “Buat README ringkas untuk project ini: setup, run, test, env vars, endpoint list, dan catatan limitasi.”
+**AI Prompt:**
+> “Create a short README with setup, run, test, env vars, endpoints, and known limits.”
 
 ---
 
-# Template Prompt Utama (copy-paste)
-Gunakan ini supaya AI konsisten:
+# Main Prompt Template (Copy–Paste)
 
 ## Context
-Saya sedang bikin aplikasi: **[deskripsi singkat]**  
-Target user: **[...]**  
-MVP fitur: **[...]**  
-Constraint: **deadline, stack, platform, aturan]**
+App: **[short description]**  
+Users: **[...]**  
+MVP features: **[...]**  
+Limits: **[deadline, stack, platform, rules]**
 
 ## Task
-Tolong hasilkan: **[output yang kamu mau: PRD / ERD / endpoint / code / test]**
+Please create: **[PRD / ERD / API / code / tests]**
 
 ## Rules
-- Jawaban harus praktis dan bisa langsung dipakai.
-- Kalau ada asumsi, tulis asumsi.
-- Fokus MVP, jangan over-engineering.
+- Make it practical and ready to use.
+- Write assumptions if any.
+- Focus on MVP only, no over-design.
 
 ---
 
-# Tips workflow AI biar cepat
-- Selalu minta AI bikin “plan + checklist” dulu, baru minta code per modul.
-- Setelah AI kasih code, minta AI bikin “review”: bug potensial, edge case, security.
-- Simpan keputusan teknis dalam `docs/decisions.md` biar nggak lupa.
+# AI Workflow Tips
+
+- Ask AI for a **plan + checklist** first.
+- Ask for code per feature, not all at once.
+- Ask AI to review code for bugs, edge cases, and security.
+- Save decisions in `docs/decisions.md`.
